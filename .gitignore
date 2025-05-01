@@ -1,0 +1,30 @@
+# Ignore MySQL Docker volume data
+docker/mysql-data/
+docker/mysql-data/*
+
+# Ignore any log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore node_modules if you ever add Node.js scripts
+node_modules/
+
+# Ignore Python cache if you use Python scripts
+__pycache__/
+*.pyc
+
+# Ignore environment files (if you ever use them)
+.env
+.env.*
+
+# Ignore backup files
+*~
