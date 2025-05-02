@@ -3,7 +3,7 @@
 # Usage: ./scripts/run_hw.sh <hw_number> <student_github_username>
 HW_NUM=$1
 STUDENT=$2
-SQL_FILE="submissions/hw${HW_NUM}/${STUDENT}/solution.sql"
+SQL_FILE="submissions/homework_${HW_NUM}/${STUDENT}/hw.sql"
 
 if [ ! -f "$SQL_FILE" ]; then
   echo "SQL file not found: $SQL_FILE"
