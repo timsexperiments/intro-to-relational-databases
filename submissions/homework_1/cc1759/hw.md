@@ -93,8 +93,6 @@ For recomendations, I think they would go with a *Vector Database* to search for
 Your cart would either be more simaler to the past orders database or the list database I'm not sure. I would think the lists database because I don't think it would need all the extra information like the past orders table, so maybe litterally just make it the same as the lists
 
 
-they probally also have a list for items ordered by everyone so they can ship the right things out to the right location.
-
 
 ### **Discord**
 
@@ -110,7 +108,8 @@ For severs joined, I would have to choose a *Graph Database*. Have each user and
 For friend, I would have it be a *Graph Database* very simaler to the joined servers database, but with all the nodes being users, and the edges connecting those who are friends.
 
 
-For private messaging and server messages, it would probally be a JSON each JSON itself hold data for a server. In it are messages as objects with different properties (author, time posted, message contents) nested within which channel its in. Since the server/DM messaging and channels are probally in JSON format, I would us a *Document Database* 
+For private messaging and server messages, it would probally be things
+
 
 
 
