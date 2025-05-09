@@ -108,8 +108,7 @@ For severs joined, I would have to choose a *Graph Database*. Have each user and
 For friend, I would have it be a *Graph Database* very simaler to the joined servers database, but with all the nodes being users, and the edges connecting those who are friends.
 
 
-For private messaging and server messages, it would probally be things
-
+For private messaging and server messages, it would probally be a JSON each JSON itself hold data for a server. In it are messages as objects with different properties (author, time posted, message contents) nested within which channel its in. Since the server/DM messaging and channels are probally in JSON format, I would us a *Document Database* 
 
 
 
