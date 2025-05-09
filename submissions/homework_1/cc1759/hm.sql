@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS lesson1;
 USE lesson1;
 
--- 
+-- create table of books
 CREATE TABLE Emilys_fav_books (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(150),
