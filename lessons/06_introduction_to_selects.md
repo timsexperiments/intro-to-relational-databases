@@ -440,5 +440,3 @@ To reinforce what you’ve learned, complete the homework assignment for this le
 
 If you have questions or want to try more examples, feel free to experiment with your tables or ask for help.
 
-**Next up:**  
-A deep dive into how querying works under the hood, including indexing, storage, and sharding!
