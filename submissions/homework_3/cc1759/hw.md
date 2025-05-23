@@ -25,7 +25,7 @@ A few places I divereged from the hw3 docs system are:
 
 - I had the members have there phone number registered instead of their email, because I feel thats what libraries normally do, but idk.
 
-- I didn't understand why some library members would have profile information like address (i feel like that would be every profile because usually they only allow people from certain districtd to join) and phone number while others wouldn't, so I changed it to be like the web profile of their app/website. This i feel makes more since plus then it also makes the review system make more since because I fell that would litterally only make since on an online envirment.
+- I didn't understand why some library members would have profile information like address (i feel like that would be every profile because usually they only allow people from certain districts to join) and phone number while others wouldn't, so I changed it to be like the web profile of their app/website. This i feel makes more since plus then it also makes the review system make more sense because I fell that would literally only make since on an online environment.
 
 - I dont have the returned part of the checkout system for the same reason as last time. I think it would be better to have an active checkouts table, and then a table for old checkouts, so once they return the book, there checkout data is moved to the old checkout data, with the return date added (but i didnt model that table)
 
@@ -45,7 +45,7 @@ I modeled optional/mandatory participation in relationships such as
 - members ||--o| web_profile
 - members ||--o{ active_checkouts
 - members ||--o{ book_reviews
-- web_profile ||--o| 
+- web_profile ||--o| books : "fav"
 
 In all of these, from the parents side it is optional, but from the childs side it is mandatory.
 
