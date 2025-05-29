@@ -51,7 +51,7 @@ erDiagram
     books ||--o{ book_reviews : "have"
 
     members ||--o| web_profile : "have"
-    members ||--o{ active_checkouts : "have"
+    members ||--o{ checkouts : "have"
     members ||--o{ book_reviews : "create"
     
     web_profile ||--o| books : "fav"

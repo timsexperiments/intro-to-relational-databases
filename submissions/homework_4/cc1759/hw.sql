@@ -1,9 +1,9 @@
  -- -- DEBUGING
-DROP DATABASE lesson3;
+-- DROP DATABASE lesson4;
 
 -- CREATE AND ENTER DATABASE
-CREATE DATABASE IF NOT EXISTS lesson3;
-USE lesson3;
+CREATE DATABASE IF NOT EXISTS lesson4;
+USE lesson4;
 
 
 
@@ -106,7 +106,7 @@ INSERT INTO members (full_name, phone_numb, card_numb) VALUES
     ("Esteven the Weaven", 8865360830, "8Jnm3K22M3HfIe4");
 
 -- add active checkouts
-INSERT INTO active_checkouts (book_id,  member_id) VALUES
+INSERT INTO checkouts (book_id,  member_id) VALUES
     (5, 1), (6, 2), (7, 3), (2, 4), (4, 1);
 
 -- add web profiles
