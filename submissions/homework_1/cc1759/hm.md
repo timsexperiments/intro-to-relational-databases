@@ -46,11 +46,7 @@ For Leaderboards, I would have a *Key-Value Database* where you can look up the 
 
 Amazon probally databases for your lists, for your recomendations, for your past orders, for all there products, a list of sellers, and your cart.
 
-<<<<<<< HEAD
-For products they should have a relational database, where the row is the product id, and the columns are data like product name, product tags, item price, amnt in stock, the seller, its ratings, its description, product information (in JSON which i assume you can attach to a table in sql), and the reviews. Since I have nothing for listed for the table, have each table be a category so search is easier. There also should be a thing so you can change type of the object (like changing its color etc..), which would change a few of the things on the table like the products price and maybe the product details I'm not sure, but I havn't thought about how to do that yet. It would look something like:
-=======
 For products they should have a rational data base, where the row is the product id, and the columnns are data like product name, product tags, item price, amnt in stock, the seller, its ratings, its description, product information (in JSON which i assumeing you can attach to a table in sql), and the reviews. Since I have nothing for listed for the table, have each table be a catagory so search is easier. Theres also should be a thing so you can change type of the object (like changing its color etc..), which woudl change a few of the things on the table like the products price and maybe the product details I'm not sure, but I havn't thought about how to do that yet. It would look somethign like:
->>>>>>> f850832 (Williams homework 1 (#5))
 
 **Table Name**
 Catagory
@@ -85,17 +81,10 @@ Past_Orders
 - Date_Delivered: DATE
 
 
-<<<<<<< HEAD
-I'm not sure how Amazon works for sellers, I would assume it just ties the products they sell to a regular account but I'm not sure. If so, it instead of list of sellers, this would just be a list of users, where the rows are user ID's and the columns are data such as the users name, users address, user payment info (idk if this would go here, that seems very insecure...), users listed products, and then other optional personalized info Amazon lets you put if you want like cloths size, pets, or interests.
-
-
-For your list database I would go with a *Key-Value Database*, with each key being the name of the list and the value being a list of the product values ID's, which are then looked up and grabbed from the products table. Though one thing I will say, is that they are ordered by last placed in list and IDK if you can do that with Key_Value pairs but idk. Otherwise it could be a relational database with table being the list, row being the an auto incremented index, and the columns having the products ID. Then its also expandable to any other info you'd want to add like date added to the list or whatever.
-=======
 I'm not sure how Amazon works for sellers, I would assume it just ties the products they sell to a regular account but im not sure. If so, it instead of list of sellers, this would just be a list of users, where the rows are user ID's and the columns are data such as the users name, users address, user payment info(idk if this would go here, that seems very insecure...), users listed products, and then other optional personalized info Amazon lets you put if you want like cloths size, pets, or intrests.
 
 
 For your list database I would go with a *Key-Value Database*, with each key being the name of the list and the value being a list of the product values ID's, which are then looked up and grabbed from the products table. Though one thing I will say, is that they are ordered by last placed in list and IDK if you can do that with Key_Value pairs but idk. Otherwise it could be a relational database with table being the list, row being the an auto incramented index, and the collums having the products ID. Then its also expandable to any other info you'd want to add like date added to the list or whatever.
->>>>>>> f850832 (Williams homework 1 (#5))
 
 
 For recomendations, I think they would go with a *Vector Database* to search for similar products to what you've bought in the past, recently searched for, or have saved in your lists.
@@ -109,21 +98,6 @@ they probally also have a list for items ordered by everyone so they can ship th
 
 ### **Discord**
 
-<<<<<<< HEAD
-Discord probably has databases for direct messages, for your friends, for your joined servers, server messages, and for users and there settings.
-
-
-For users it would probably have a *Relational Database* with rows being your user ID (VARCHAR) and columns being things such as, disp_name, status, Tiene_Nitro, date joined, and all the settings (or they would have it)
-
-
-For severs joined, I would have to choose a *Graph Database*. Have each user and each server be a node, and have a user be connected to the servers they've joined by node. This should provide for easy lookup for mutual server with other users (though I'm not sure how the lookup would be any faster than a list?)
-
-
-For friends, I would have it be a *Graph Database* very similar to the joined servers database, but with all the nodes being users, and the edges connecting those who are friends.
-
-
-For private messaging and server messages, it would probably be a JSON each JSON itself hold data for a server. In it are messages as objects with different properties (author, time posted, message contents) nested within which channel its in. Since the server/DM messaging and channels are probably in JSON format, I would us a *Document Database*
-=======
 Discord probally has databases direct messages, for your friends, for your joined servers, server messages, and for users and there settings.
 
 
@@ -137,7 +111,6 @@ For friend, I would have it be a *Graph Database* very simaler to the joined ser
 
 
 For private messaging and server messages, it would probally be a JSON each JSON itself hold data for a server. In it are messages as objects with different properties (author, time posted, message contents) nested within which channel its in. Since the server/DM messaging and channels are probally in JSON format, I would us a *Document Database* 
->>>>>>> f850832 (Williams homework 1 (#5))
 
 
 
@@ -145,12 +118,6 @@ For private messaging and server messages, it would probally be a JSON each JSON
 
 
 
-<<<<<<< HEAD
-## **Part 2: Define a Relational Database**
-
-A relational database is a collection of tables, each of which is divided into columns with predefined data types and with keys of predefined data types relating to each row.
-=======
 ## **Part 2: Define a Rational Database**
 
 A rational database is a collection of tables, each of which is devided into columns with predefined data types and with keys of predefined data types relating to each row.
->>>>>>> f850832 (Williams homework 1 (#5))
