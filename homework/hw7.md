@@ -23,19 +23,15 @@ _(Books that have never been checked out should still appear, with NULL for memb
 
 ### 5. List all checkouts, showing the member name, book title, and review text if a review exists for that checkout.
 
-### 6. List all books and whether they have ever been reviewed.
+### 6. List all members and all reviews they have written, including members who have never written a review.
 
-_(Show book title and a column "has_review" that is 'yes' or 'no')_
-
-### 7. List all members and all reviews they have written, including members who have never written a review.
-
-### 8. List all books and all members, showing every possible combination (cartesian product).
+### 7. List all books and all members, showing every possible combination.
 
 _(Limit to 10 results.)_
 
-### 9. List all members and all checkouts, showing member name and checkout date, including members with no checkouts and checkouts with no matching member.
+### 8. List all members and all checkouts, showing member name and checkout date, including members with no checkouts and checkouts with no matching member.
 
-_(If your database does not support FULL JOIN, you may use another approach.)_
+_(If your database does not support FULL JOIN, you may need to use another approach.)_
 
 ## Submission
 
