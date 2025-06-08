@@ -179,10 +179,10 @@ SELECT * FROM checkouts WHERE member_id = @last_memb_id + 3;
 SELECT title, isbn FROM books WHERE title LIKE "%python%";
 
 -- 7. select all web profiles that have .edu emails
-SELECT * FROM web_profiles WHERE email LIKE "%.edu%";
+SELECT * FROM web_profiles WHERE LOWER(email) LIKE "%.edu";
 
 -- 8. select all books startign with the
-SELECT * FROM books WHERE title LIKE "the%";
+SELECT * FROM books WHERE LOWER(title) LIKE "the%";
 
 -- 9. select active checkouts
 SELECT * FROM checkouts WHERE returned_date = NULL;
@@ -197,10 +197,10 @@ SELECT DATE_FORMAT(NOW(), '%Y') - year_published AS age FROM books
     ORDER BY age DESC;
 
 -- 12. select the alphabeticly first two books
-SELECT * FROM books ORDER BY title ASC LIMIT 2;
+SELECT * FROM books ORDER BY LOWER(title) ASC LIMIT 2;
 
 -- 13. alphabeticly pick the next two books
-SELECT * FROM books ORDER BY title ASC LIMIT 2 OFFSET 2;
+SELECT * FROM books ORDER BY LOWER(title) ASC LIMIT 2 OFFSET 2;
 
 -- 14. select review id, book id, profile id, and rating from all book reviews
 SELECT id AS review_id, book_id, memb_web_prof_id AS profile_id, rating FROM book_reviews
