@@ -17,5 +17,4 @@ INSERT INTO Emilys_fav_books (title, author, year_published)
     VALUES ('Grace (but said in a French accent)', 'Mary Casanova', 2015);
 
 -- display all rows/books in the table
-
 SELECT * FROM Emilys_fav_books;
