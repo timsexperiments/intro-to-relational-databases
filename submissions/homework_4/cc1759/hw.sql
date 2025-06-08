@@ -52,12 +52,12 @@ CREATE TABLE web_profiles (
 
 -- create a table for all books that are activly checked out
 CREATE TABLE checkouts (
-    id INT PRIMARY KEY AUTO_INCREMENT,
     book_id INT NOT NULL,
     member_id INT NOT NULL,
     checkout_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     due_date DATE DEFAULT (DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY)),
     returned_date DATETIME,
+    PRIMARY KEY (book_id, member_id, checkout_date)
     CONSTRAINT fk_ac_book FOREIGN KEY (book_id) REFERENCES books(id),
     CONSTRAINT fk_ac_member FOREIGN KEY (member_id) REFERENCES members(id)
 );
