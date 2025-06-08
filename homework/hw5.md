@@ -48,6 +48,7 @@ Insert at least the following (feel free to add more for richer queries later):
 
 ### 3. Update Data
 
+- Update the email address for one member using their primary key or unique key.
 - Update the published year for one book.
 - Mark one checkout as returned by setting its `returned_date` to the current timestamp.
 - Update the rating of a review.
