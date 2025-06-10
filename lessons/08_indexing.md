@@ -1,4 +1,4 @@
-# Lesson 8: Indexing and Query Performance
+# Lesson 8: Indexing & Query Performance
 
 ## What You’ll Learn
 
