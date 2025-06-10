@@ -1,0 +1,11 @@
+# **Homework Assignment 5: Inserting, Deleting, and Updating Data**
+
+I had to first update my old data to make it comply with what the hw document wanted. I mostly just added more checkouts and profile stuff so I could delete or update them in later sections. I did have the error from auto_incrementing not resetting that you helped me with, but besides that, everything was fine. 
+
+ The main challenge was deleting the data from the tables. In previous lessons I simply dropped the database at the start to reset the tables. It wasn't a hard problem, but I thought about using if-else statements first and didn't think of the easy way, so it took a lot of time because I had to research and learn how to do a bunch of stuff and how this language works. Also this tip given, "You may need to temporarily disable or reorder foreign key checks to avoid constraint errors," sounds like it wanted me to litterally disable foriegn keys which you told me wasn't neccasary. I'm sure if I didn't have this tip I wouldv'e figured out how to do it the other way, but it made me think I was supposed to go on that route. I kept the way I did it originally at the bottom of the script commented out. Also I still am only guessing on what this sentence means, "**Do not** assume specific table names—delete from all tables you created in your previous homework(s)." I pretty sure i understand it, but I don't think it ment to say tables twice, also the dash inbetween names and delete confuses me so much I reread the sentence like 10 times and at least 5 were due to that lol(FINISH LATER)
+
+Not much to say about the update part. It was pretty simple afterall.
+
+I went with soft deletion because keeping records could be important and because connections would be less likely to break (though I think you could make it work either way in most cases). I used the number deletion system because I was too lazy to come up with and type out dates lol. If you want I can change it to the date type because I believe its more useful. I also decided to add it to all tables it could apply in (I hope I remember to update the mermaid with it), 
+
+Making the transactions where pretty simple and went by fast. I thought it was pretty cool when I first learned they exist.
