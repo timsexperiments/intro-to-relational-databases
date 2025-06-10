@@ -1,0 +1,57 @@
+---
+title: Liberary System
+---
+
+erDiagram
+    books{
+        int id "pk auto_increm"
+        string title "!null"
+        string ISBN "uni !null"
+        date year_published
+    }
+    authors{
+        int id "pk auto_increm"
+        string name "!null"
+    }
+    book_authors{
+        int book_id "pk fk !null"
+        int author_id "pk fk !null"        
+    }
+    members{
+        int id "pk auto_increm"
+        string name "!null"
+        string phone_numb "uni !null"
+        int card_numb "uni !null"
+    }
+    web_profile{
+        int id "pk auto_increm"
+        int member_id "fk uni !null"
+        string email "uni !null"
+        int fav_book "fk"
+    }
+    checkouts{
+        int member_id "pk fk !null"
+        int book_id "pk fk !null"
+        date checkout_date "pk defult"
+        date due_date "defult"
+        date returned_date
+    }
+    book_reviews{
+        int book_id "pk fk !null"
+        int member_web_id "pk fk !null"
+        int rating "!null"
+        string review
+        date review_date "defult"
+    }
+
+
+    authors ||--o{ book_authors : "be"
+
+    books ||--o{ book_authors : "have"
+    books ||--o{ book_reviews : "have"
+
+    members ||--o| web_profile : "have"
+    members ||--o{ checkouts : "have"
+    members ||--o{ book_reviews : "create"
+    
+    web_profile ||--o| books : "fav"
