@@ -247,3 +247,15 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 --         OR book_reviews.review LIKE "%love%" 
 --         OR book_reviews.review LIKE "%adore%" 
 --         OR book_reviews.review LIKE "%best%");
+
+
+-- FORIGN KEY INDEXES
+
+CREATE INDEX idx_ba_book_id ON book_authors (book_id);
+CREATE INDEX idx_ba_author_id ON book_authors (author_id);
+
+CREATE INDEX idx_wp_member_id ON web_profiles (member_id);
+CREATE INDEX idx_wp_fav_book ON web_profiles (fav_book);
+
+CREATE INDEX idx_br_book_id ON book_reviews (book_id);
+CREATE INDEX idx_br_web_prof_id ON book_reviews (memb_web_prof_id);
