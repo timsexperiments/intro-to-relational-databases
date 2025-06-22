@@ -34,7 +34,7 @@ Write a SQL script (`hw9.sql`) that answers the following questions using your e
 
 ### Part 4: Conditional Logic (`CASE WHEN` / `IF`)
 
-11. **Book Popularity Category:** List all books, showing their title and a new column `popularity_category`. If the book has `3 or more` checkouts (you'll need to use a subquery or make an assumption on data if aggregation is not allowed yet), categorize it as 'Highly Popular', if `1-2` checkouts 'Moderately Popular', otherwise 'Not Popular'. (Assume you can count checkouts, or just classify based on some other condition for now if aggregation is strictly next lesson).
+11. **Review Sentiment:** List all reviews and their sentiment based on the rating where 1 = awful, 2 = bad, 3 = mid, 4 = good, and 5 = great.
 12. **Review Sentiment:** List all reviews, showing `review_id`, `rating`, and a `sentiment` column: 'Positive' if rating is 4 or 5, 'Neutral' if 3, and 'Negative' if 1 or 2.
 13. **Member Status:** List all members, showing their name and a `member_status` column: 'Active' if they have any current checkouts (returned_date IS NULL), otherwise 'Inactive'.
 
