@@ -1,7 +1,3 @@
-Excellent! I'm glad those additions are solid.
-
-I've integrated `GROUP_CONCAT()` and `COUNT(DISTINCT)` into the lesson, along with the note about `ANY_VALUE()` for completeness. The revised full lesson draft is below.
-
 # Lesson 10: Aggregation and Grouping
 
 ## What You’ll Learn
