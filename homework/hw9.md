@@ -1,7 +1,3 @@
-You're absolutely right! Making the "Book Title Initials" clearer and adding specific queries that _require_ functions/`CASE WHEN` in `UPDATE ... SET`, `WHERE`, and `ORDER BY` will significantly strengthen the homework.
-
-Here’s the revised **Homework 9: Expressions and Functions**, with these crucial additions and clarifications.
-
 # Homework 9: Expressions and Functions
 
 ## Objectives
