@@ -1,7 +1,3 @@
-You're absolutely right! Making the "Book Title Initials" clearer and adding specific queries that _require_ functions/`CASE WHEN` in `UPDATE ... SET`, `WHERE`, and `ORDER BY` will significantly strengthen the homework.
-
-Here’s the revised **Homework 9: Expressions and Functions**, with these crucial additions and clarifications.
-
 # Homework 9: Expressions and Functions
 
 ## Objectives
@@ -38,7 +34,13 @@ Write a SQL script (`hw9.sql`) that answers the following questions using your e
 
 ### Part 4: Conditional Logic (`CASE WHEN` / `IF`)
 
-11. **Book Popularity Category:** List all books, showing their title and a new column `popularity_category`. If the book has `3 or more` checkouts (you'll need to use a subquery or make an assumption on data if aggregation is not allowed yet), categorize it as 'Highly Popular', if `1-2` checkouts 'Moderately Popular', otherwise 'Not Popular'. (Assume you can count checkouts, or just classify based on some other condition for now if aggregation is strictly next lesson).
+11. **Book Era Classification:** List all books, showing their title, publication year, and a new column named book_era.
+
+    - If the book was published in or after 2020, it should be categorized as 'Modern'.
+    - If published between 2000 and 2019, categorize it as '21st Century'.
+    - If published between 1980 and 1999, categorize it as 'Late 20th Century'.
+    - Anything before that, categorize it as 'Classic'.
+
 12. **Review Sentiment:** List all reviews, showing `review_id`, `rating`, and a `sentiment` column: 'Positive' if rating is 4 or 5, 'Neutral' if 3, and 'Negative' if 1 or 2.
 13. **Member Status:** List all members, showing their name and a `member_status` column: 'Active' if they have any current checkouts (returned_date IS NULL), otherwise 'Inactive'.
 
