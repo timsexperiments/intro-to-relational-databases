@@ -93,8 +93,6 @@ For recomendations, I think they would go with a *Vector Database* to search for
 Your cart would either be more simaler to the past orders database or the list database I'm not sure. I would think the lists database because I don't think it would need all the extra information like the past orders table, so maybe litterally just make it the same as the lists
 
 
-they probally also have a list for items ordered by everyone so they can ship the right things out to the right location.
-
 
 ### **Discord**
 
