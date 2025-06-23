@@ -92,7 +92,7 @@ _NOTE: mayeb also add a renewed var to books, because in a real system you can r
 
 - 16. O(log(n))
 
-- 17. False. Adding too many quieries will make writing to those tables slower and may cause the system to choose the not the most efficient quiery avalible by accident.
+- 17. False. Adding too many indexes will make writing to those tables slower and may cause the system to choose the not the most efficient quiery avalible by accident.
 
 - 18. **Scaling Up** indicates growing the proccesing power and storage capibilities to your existing servers, while **Scaling Out** indicates splitting up your database between multiple (usually less powerful) servers (AKA sharding).
 
