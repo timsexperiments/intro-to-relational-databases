@@ -193,8 +193,8 @@ CREATE INDEX idx_author_name ON authors (name);
 
 -- Composite Index
 
-CREATE INDEX idx_memberID_checkoutDate ON checkouts (book_id, checkout_date);
-CREATE INDEX idx_bookID_checkoutDate ON checkouts (member_id, checkout_date);
+CREATE INDEX idx_bookID_checkoutDate ON checkouts (book_id, checkout_date);
+CREATE INDEX idx_memberID_checkoutDate ON checkouts (member_id, checkout_date);
 -- -- member name ---> member ---> member data (their check outs, name, and phone#)
 -- EXPLAIN
 -- SELECT members.full_name AS name, members.phone_numb, books.title, checkouts.checkout_date
