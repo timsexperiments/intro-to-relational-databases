@@ -213,7 +213,8 @@ SELECT members.full_name AS member, books.title, book_reviews.rating, book_revie
 SELECT members.full_name AS members, books.title
     FROM members
     CROSS JOIN books
-    ORDER BY members.full_name;
+    ORDER BY members.full_name
+    LIMIT 10;
 
 -- liSt all members and all checkouts without exclusion of null values
 -- can't have a checkout without a member ID because it is part of the primary key
