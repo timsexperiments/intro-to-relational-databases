@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS book_reviews (
     book_id INT NOT NULL,
     memb_web_prof_id INT NOT NULL,
     review TEXT,
-    rating DECIMAL(2, 1) CHECK (rating >= 0 && rating < 6) NOT NULL,
+    rating DECIMAL(2, 1) CHECK (rating >= 1 && rating < 6) NOT NULL,
     review_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     is_deleted TINYINT(1) DEFAULT 0,
     PRIMARY KEY (memb_web_prof_id, book_id),
@@ -152,7 +152,7 @@ SET @last_prof_id = (SELECT LAST_INSERT_ID());
 -- should be (5, 1), (5, 2), (3, 2)
 INSERT INTO book_reviews (book_id, memb_web_prof_id, review, rating) VALUES
     (@last_book_id + 4, @last_prof_id + 0, "OMG, litterally the BEST book EVER!!! CHANGED my WHOLE LIFE!!!! 10/10, wouldn't recomend, I would DAMAND you to read it!!!!!", 5),
-    (@last_book_id + 4, @last_prof_id + 1, "BOOOO, this stinks! What a bad book", 0.5),
+    (@last_book_id + 4, @last_prof_id + 1, "BOOOO, this stinks! What a bad book", 1),
     (@last_book_id + 3, @last_prof_id + 1, "Very Relatable", 4.8),
     (@last_book_id + 4, @last_prof_id + 2, "A great story teeming with adventure.", 3.9);
 
@@ -184,14 +184,14 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 
 
 
--- PART 1 ANSWERS:
+-- -- PART 1 ANSWERS:
 
 -- -- Book Age (1)
 -- SELECT title, year_published,
 --     CAST(YEAR(CURRENT_DATE) AS SIGNED) - CAST(year_published AS SIGNED) AS book_age 
 --     FROM books;
 
--- -- Book Due Status (2, 10)
+-- -- Book Due Status (2)
 -- SELECT member_id, book_id, 
 --     CASE
 --         WHEN returned_date IS NOT NULL THEN "Book Returned"
@@ -202,15 +202,18 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 --     FROM checkouts;
 
 -- -- Normalized Book Rating (3)
--- SELECT book_id, memb_web_prof_id, rating, rating * 20 AS normalized_rating
+-- SELECT book_id, memb_web_prof_id, rating, 
+--     ((rating - 1) / 4) * 100 AS normalized_rating
 --     FROM book_reviews;
 
 
 -- PART 2 ANSWERS:
 
--- -- Splitting First and Last Names (4)
--- SELECT SUBSTRING(full_name, CHAR_LENGTH(full_name) - INSTR(REVERSE(full_name), ' ') + 2) AS last_name,
---     SUBSTRING(full_name, 1, INSTR(full_name, ' ')) AS first_name
+-- Splitting First and Last Names (4)
+-- SELECT CONCAT(
+--     SUBSTRING(full_name, CHAR_LENGTH(full_name) - INSTR(REVERSE(full_name), ' ') + 2),
+--     " ",
+--     SUBSTRING(full_name, 1, INSTR(full_name, ' '))) AS formatted_name
 --     FROM members;
 
 -- -- Book Initials (5)
@@ -229,17 +232,23 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 --     JOIN members ON web_profiles.member_id = members.id;
 
 
--- PART 3 ANSWERS:
+-- -- PART 3 ANSWERS:
 
 -- -- American Date Formating (8)
 -- SELECT book_id, member_id, DATE_FORMAT(checkout_date, "%b %d, %Y (%I:%i %p)") AS american_checkout_format
 --     FROM checkouts;
 
--- Checkout Month (9)
+-- -- Checkout Month (9)
 -- SELECT book_id, member_id, MONTH(checkout_date) AS checkout_month FROM checkouts;
 
+-- -- Return Deadline (10)
+SELECT member_id, book_id,
+    DATE_ADD(checkout_date, INTERVAL 2 WEEK) AS due_date,
+    DATE_ADD(checkout_date, INTERVAL 3 WEEK) AS return_deadline
+    FROM checkouts;
 
--- PART 4 ANSWERS:
+
+-- -- PART 4 ANSWERS:
 
 -- -- Book Popularity (11)
 -- SELECT book.title, 
@@ -259,7 +268,7 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 -- -- Member Status (13)
 -- SELECT members.full_name,
 --     CASE 
---         WHEN COUNT(checkouts.member_id) > 0
+--         WHEN checkouts.returned_date IS NULL
 --         THEN "ACTIVE"
 --         ELSE "INACTIVE"
 --     END AS member_status
@@ -268,7 +277,7 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 --     GROUP BY members.full_name;
 
 
--- PART 5 ANSWERS:
+-- -- PART 5 ANSWERS:
 
 -- -- Rounded Ratings (14)
 -- SELECT book_id, memb_web_prof_id, rating, ROUND(rating, 0) AS rounded_rating
@@ -299,13 +308,13 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 -- SELECT * FROM hypothetical_books;
 
 
--- PART 6 ANSWERS:
+-- -- PART 6 ANSWERS:
 
 -- -- Create Due Date (18)
 -- ALTER TABLE checkouts ADD COLUMN due_date Date;
 -- UPDATE checkouts
 --     SET due_date = CASE
---         WHEN YEAR(checkout_date) > 2023 
+--         WHEN YEAR(checkout_date) < 2024 
 --         THEN DATE_ADD(checkout_date, INTERVAL 3 WEEK)
 --         ELSE DATE_ADD(checkout_date, INTERVAL 2 WEEK)
 --     END;
@@ -324,5 +333,3 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 --     FROM web_profiles
 --     LEFT JOIN members ON web_profiles.member_id = members.id
 --     ORDER BY LENGTH(web_profiles.email) ASC;
-
--- finish 13.) and 17.)
