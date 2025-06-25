@@ -184,152 +184,156 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 
 
 
--- -- PART 1 ANSWERS:
+-- PART 1 ANSWERS:
 
--- -- Book Age (1)
--- SELECT title, year_published,
---     CAST(YEAR(CURRENT_DATE) AS SIGNED) - CAST(year_published AS SIGNED) AS book_age 
---     FROM books;
+-- Book Age (1)
+SELECT title, year_published,
+    CAST(YEAR(CURRENT_DATE) AS SIGNED) - CAST(year_published AS SIGNED) AS book_age 
+    FROM books;
 
--- -- Book Due Status (2)
--- SELECT member_id, book_id, 
---     CASE
---         WHEN returned_date IS NOT NULL THEN "Book Returned"
---         WHEN CAST(DATEDIFF(CURRENT_DATE, DATE_ADD(checkout_date, INTERVAL 2 WEEK)) AS SIGNED) > 0
---         THEN CONCAT("OVERDUE BY ", CAST(DATEDIFF(CURRENT_DATE, DATE_ADD(checkout_date, INTERVAL 2 WEEK)) AS CHAR), " DAYS")
---         ELSE CONCAT("Due On ", CAST(DATE_ADD(checkout_date, INTERVAL 2 WEEK) AS CHAR))
---     END AS due_status
---     FROM checkouts;
+-- Book Due Status (2)
+SELECT member_id, book_id, 
+    CASE
+        WHEN returned_date IS NOT NULL THEN "Book Returned"
+        WHEN CAST(DATEDIFF(CURRENT_DATE, DATE_ADD(checkout_date, INTERVAL 2 WEEK)) AS SIGNED) > 0
+        THEN CONCAT("OVERDUE BY ", CAST(DATEDIFF(CURRENT_DATE, DATE_ADD(checkout_date, INTERVAL 2 WEEK)) AS CHAR), " DAYS")
+        ELSE CONCAT("Due On ", CAST(DATE_ADD(checkout_date, INTERVAL 2 WEEK) AS CHAR))
+    END AS due_status
+    FROM checkouts;
 
--- -- Normalized Book Rating (3)
--- SELECT book_id, memb_web_prof_id, rating, 
---     ((rating - 1) / 4) * 100 AS normalized_rating
---     FROM book_reviews;
+-- Normalized Book Rating (3)
+SELECT book_id, memb_web_prof_id, rating, 
+    ((rating - 1) / 4) * 100 AS normalized_rating
+    FROM book_reviews;
 
 
 -- PART 2 ANSWERS:
 
 -- Splitting First and Last Names (4)
--- SELECT CONCAT(
---     SUBSTRING(full_name, CHAR_LENGTH(full_name) - INSTR(REVERSE(full_name), ' ') + 2),
---     " ",
---     SUBSTRING(full_name, 1, INSTR(full_name, ' '))) AS formatted_name
---     FROM members;
+SELECT CONCAT(
+    SUBSTRING(full_name, CHAR_LENGTH(full_name) - INSTR(REVERSE(full_name), ' ') + 2),
+    " ",
+    SUBSTRING(full_name, 1, INSTR(full_name, ' '))) AS formatted_name
+    FROM members;
 
--- -- Book Initials (5)
--- SELECT title,
---     CONCAT(SUBSTRING(title, 1, 1), SUBSTRING(title, INSTR(title, ' ') + 1, 1)) AS book_initials
---     FROM books;
+-- Book Initials (5)
+SELECT title,
+    CONCAT(SUBSTRING(title, 1, 1), SUBSTRING(title, INSTR(title, ' ') + 1, 1)) AS book_initials
+    FROM books;
 
--- -- Censored Book Reviews (6)
--- SELECT book_id, memb_web_prof_id, rating, REPLACE(LOWER(review), "bad", "***") AS censored_review
---     FROM book_reviews;
+-- Censored Book Reviews (6)
+SELECT book_id, memb_web_prof_id, rating, REPLACE(LOWER(review), "bad", "***") AS censored_review
+    FROM book_reviews;
 
--- -- Email Domain (7)
--- SELECT members.full_name, web_profiles.email,
---     SUBSTRING(web_profiles.email, INSTR(web_profiles.email, "@") + 1) AS email_domain
---     FROM web_profiles
---     JOIN members ON web_profiles.member_id = members.id;
+-- Email Domain (7)
+SELECT members.full_name, web_profiles.email,
+    SUBSTRING(web_profiles.email, INSTR(web_profiles.email, "@") + 1) AS email_domain
+    FROM web_profiles
+    JOIN members ON web_profiles.member_id = members.id;
 
 
--- -- PART 3 ANSWERS:
+-- PART 3 ANSWERS:
 
--- -- American Date Formating (8)
--- SELECT book_id, member_id, DATE_FORMAT(checkout_date, "%b %d, %Y (%I:%i %p)") AS american_checkout_format
---     FROM checkouts;
+-- American Date Formating (8)
+SELECT book_id, member_id, DATE_FORMAT(checkout_date, "%b %d, %Y (%I:%i %p)") AS american_checkout_format
+    FROM checkouts;
 
--- -- Checkout Month (9)
--- SELECT book_id, member_id, MONTH(checkout_date) AS checkout_month FROM checkouts;
+-- Checkout Month (9)
+SELECT book_id, member_id, MONTH(checkout_date) AS checkout_month FROM checkouts;
 
--- -- Return Deadline (10)
+-- Return Deadline (10)
 SELECT member_id, book_id,
     DATE_ADD(checkout_date, INTERVAL 2 WEEK) AS due_date,
     DATE_ADD(checkout_date, INTERVAL 3 WEEK) AS return_deadline
     FROM checkouts;
 
 
--- -- PART 4 ANSWERS:
+-- PART 4 ANSWERS:
 
--- -- Book Popularity (11)
--- SELECT book.title, 
---     CASE
---         WHEN book_reviews.rating >= 3 THEN '' 
---     END AS popularity
+-- Book Era (11)
+SELECT title, year_published,
+    CASE
+        WHEN year_published >= 2020 THEN "Modern"
+        WHEN year_published >= 2000 THEN "21 Century"
+        WHEN year_published >= 1980 THEN "Late 20 Century"
+        ELSE "Classic"
+    END AS popularity
+    FROM books;
 
--- -- Reveiw Sentiment (12)
--- SELECT book_id, memb_web_prof_id, rating,
---     CASE 
---         WHEN rating >= 4 THEN "Positive"
---         WHEN rating < 3 THEN "Negative"
---         ELSE "Neutral"
---     END AS sentiment
---     FROM book_reviews;
+-- Reveiw Sentiment (12)
+SELECT book_id, memb_web_prof_id, rating,
+    CASE 
+        WHEN rating >= 4 THEN "Positive"
+        WHEN rating < 3 THEN "Negative"
+        ELSE "Neutral"
+    END AS sentiment
+    FROM book_reviews;
 
--- -- Member Status (13)
--- SELECT members.full_name,
---     CASE 
---         WHEN checkouts.returned_date IS NULL
---         THEN "ACTIVE"
---         ELSE "INACTIVE"
---     END AS member_status
---     FROM members
---     LEFT JOIN checkouts ON members.id = checkouts.member_id
---     GROUP BY members.full_name;
+-- Member Status (13)
+SELECT members.full_name,
+    CASE 
+        WHEN checkouts.returned_date IS NULL
+        THEN "ACTIVE"
+        ELSE "INACTIVE"
+    END AS member_status
+    FROM members
+    LEFT JOIN checkouts ON members.id = checkouts.member_id
+    GROUP BY members.full_name;
 
 
--- -- PART 5 ANSWERS:
+-- PART 5 ANSWERS:
 
--- -- Rounded Ratings (14)
--- SELECT book_id, memb_web_prof_id, rating, ROUND(rating, 0) AS rounded_rating
---     FROM book_reviews;
+-- Rounded Ratings (14)
+SELECT book_id, memb_web_prof_id, rating, ROUND(rating, 0) AS rounded_rating
+    FROM book_reviews;
 
--- -- RANDOM BOOK SUGGESTION (15)
--- SELECT title, isbn
---     FROM books
---     ORDER BY RAND(books.id)
---     LIMIT 3;
+-- RANDOM BOOK SUGGESTION (15)
+SELECT title, isbn
+    FROM books
+    ORDER BY RAND(books.id)
+    LIMIT 3;
 
--- -- Contact Information (16)
--- SELECT members.full_name, 
---     CONCAT("(", COALESCE(web_profiles.email, members.phone_numb), ")") AS contact_info
---     FROM members
---     LEFT JOIN web_profiles ON members.id = web_profiles.member_id;
+-- Contact Information (16)
+SELECT members.full_name, 
+    CONCAT("(", COALESCE(web_profiles.email, members.phone_numb), ")") AS contact_info
+    FROM members
+    LEFT JOIN web_profiles ON members.id = web_profiles.member_id;
 
 -- UUID Book ID (17)
--- CREATE TABLE IF NOT EXISTS hypothetical_books (
---     id VARCHAR(36) PRIMARY KEY,
---     title VARCHAR(100) NOT NULL,
---     isbn DECIMAL(13, 0) ZEROFILL UNIQUE NOT NULL,
---     year_published YEAR,
---     is_deleted TINYINT(1) DEFAULT 0
--- );
--- INSERT INTO hypothetical_books(id, title, isbn, year_published) VALUES 
---     (UUID(), "hYPOTHETICAL BOOk", "9999999999999", YEAR(CURRENT_DATE));
--- SELECT * FROM hypothetical_books;
+CREATE TABLE IF NOT EXISTS hypothetical_books (
+    id VARCHAR(36) PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    isbn DECIMAL(13, 0) ZEROFILL UNIQUE NOT NULL,
+    year_published YEAR,
+    is_deleted TINYINT(1) DEFAULT 0;
+);
+INSERT INTO hypothetical_books(id, title, isbn, year_published) VALUES 
+    (UUID(), "hYPOTHETICAL BOOk", "9999999999999", YEAR(CURRENT_DATE));
+SELECT * FROM hypothetical_books;
 
 
--- -- PART 6 ANSWERS:
+-- PART 6 ANSWERS:
 
--- -- Create Due Date (18)
--- ALTER TABLE checkouts ADD COLUMN due_date Date;
--- UPDATE checkouts
---     SET due_date = CASE
---         WHEN YEAR(checkout_date) < 2024 
---         THEN DATE_ADD(checkout_date, INTERVAL 3 WEEK)
---         ELSE DATE_ADD(checkout_date, INTERVAL 2 WEEK)
---     END;
--- -- SELECT book_id, member_id, DATE_FORMAT(checkout_date, "%Y-%m-%d"), due_date,
--- --     DATEDIFF(due_date, checkout_date) AS due_date_distance
--- --     FROM checkouts
-
--- -- Select overdue checkouts (19)
--- SELECT book_id, member_id
+-- Create Due Date (18)
+ALTER TABLE checkouts ADD COLUMN due_date Date;
+UPDATE checkouts
+    SET due_date = CASE
+        WHEN YEAR(checkout_date) < 2024 
+        THEN DATE_ADD(checkout_date, INTERVAL 3 WEEK)
+        ELSE DATE_ADD(checkout_date, INTERVAL 2 WEEK)
+    END;
+-- SELECT book_id, member_id, DATE_FORMAT(checkout_date, "%Y-%m-%d"), due_date,
+--     DATEDIFF(due_date, checkout_date) AS due_date_distance
 --     FROM checkouts
---     WHERE returned_date IS NULL
---     AND DATEDIFF(CURRENT_DATE, checkout_date) > 14;
 
--- -- Order Members By Email Legnth (20)
--- SELECT members.full_name, email
---     FROM web_profiles
---     LEFT JOIN members ON web_profiles.member_id = members.id
---     ORDER BY LENGTH(web_profiles.email) ASC;
+-- Select overdue checkouts (19)
+SELECT book_id, member_id
+    FROM checkouts
+    WHERE returned_date IS NULL
+    AND DATEDIFF(CURRENT_DATE, checkout_date) > 14;
+
+-- Order Members By Email Legnth (20)
+SELECT members.full_name, email
+    FROM web_profiles
+    LEFT JOIN members ON web_profiles.member_id = members.id
+    ORDER BY LENGTH(web_profiles.email) ASC;
