@@ -134,7 +134,7 @@ INSERT INTO checkouts (book_id,  member_id, checkout_date, returned_date) VALUES
     (@last_book_id + 3, @last_memb_id + 0, '2012-04-13 6:02:57', '2012-04-26 16:23:44'), 
     (@last_book_id + 5, @last_memb_id + 0, DEFAULT, NULL),
     (@last_book_id + 4, @last_memb_id + 1, "2025-06-14", NULL), 
-    (@last_book_id + 4, @last_memb_id + 0, DEFAULT, NULL), 
+    (@last_book_id + 4, @last_memb_id + 0, "2025-06-25 15:52:05", NULL), 
     (@last_book_id + 1, @last_memb_id + 3, "2025-05-04 15:59:01", NULL), 
     (@last_book_id + 3, @last_memb_id + 3, DEFAULT, NULL), 
     (@last_book_id + 2, @last_memb_id + 3, '2015-11-11 13:10:08', '2015-11-19 13:30:41'),
@@ -183,116 +183,119 @@ CREATE FULLTEXT INDEX idx_reviews ON book_reviews (review);
 
 -- ANSWERS
 
--- -- total amt of members (1)
--- SELECT COUNT(members.id) AS members_total FROM members;
+-- total amt of members (1)
+SELECT COUNT(members.id) AS members_total FROM members;
 
--- -- total amount of books (2)
--- SELECT COUNT(books.id) AS books_total FROM books;
+-- total amount of books (2)
+SELECT COUNT(books.id) AS books_total FROM books;
 
--- -- average review rating (3)
--- SELECT AVG(book_reviews.rating) AS average_review FROM book_reviews;
+-- average review rating (3)
+SELECT AVG(book_reviews.rating) AS average_review FROM book_reviews;
 
--- -- most and least recent checkout (4)
--- SELECT MAX(checkout_date) AS newest_checkout FROM checkouts;
--- SELECT MIN(checkout_date) AS oldlest_checkout FROM checkouts;
+-- most and least recent checkout (4)
+SELECT MAX(checkout_date) AS newest_checkout,
+    MIN(checkout_date) AS oldlest_checkout
+    FROM checkouts;
 
--- -- amount of authors (5)
--- SELECT COUNT(authors.id) AS author_amt FROM authors;
+-- amount of authors (5)
+SELECT COUNT(authors.id) AS author_amt FROM authors;
 
--- -- books published amt per author (6)
--- SELECT authors.name, COUNT(books.id) AS books_written_amt
---     FROM authors
---     LEFT JOIN book_authors ON authors.id = book_authors.author_id
---     LEFT JOIN books ON book_authors.book_id = books.id
---     GROUP BY authors.id; 
+-- books published amt per author (6)
+SELECT authors.id, authors.name, COUNT(books.id) AS books_written_amt
+    FROM authors
+    LEFT JOIN book_authors ON authors.id = book_authors.author_id
+    LEFT JOIN books ON book_authors.book_id = books.id
+    GROUP BY authors.id, authors.name; 
 
--- -- checkouts amt per members (7)
--- SELECT members.full_name, COUNT(checkouts.member_id) AS checkout_amt
---     FROM members
---     LEFT JOIN checkouts ON members.id = checkouts.member_id
---     GROUP BY members.id;
+-- checkouts amt per members (7)
+SELECT members.full_name, COUNT(checkouts.member_id) AS checkout_amt
+    FROM members
+    LEFT JOIN checkouts ON members.id = checkouts.member_id
+    GROUP BY members.id;
 
--- -- average rating for each book (8)
--- SELECT books.title, AVG(book_reviews.rating) AS average_rating
---     FROM books
---     LEFT JOIN book_reviews ON books.id = book_reviews.book_id
---     GROUP BY books.id;
+-- average rating for each book (8)
+SELECT books.title, AVG(book_reviews.rating) AS average_rating
+    FROM books
+    LEFT JOIN book_reviews ON books.id = book_reviews.book_id
+    GROUP BY books.id;
 
--- -- review amt per book (9)
--- SELECT books.title, 
---     GROUP_CONCAT(book_reviews.review ORDER BY book_reviews.review_date ASC SEPARATOR ' | ') AS reviews
---     FROM books
---     LEFT JOIN book_reviews ON books.id = book_reviews.book_id
---     GROUP BY books.id;
+-- reviews per book (9)
+SELECT books.title, 
+    GROUP_CONCAT(book_reviews.review ORDER BY book_reviews.review_date ASC SEPARATOR ' | ') AS reviews
+    FROM books
+    LEFT JOIN book_reviews ON books.id = book_reviews.book_id
+    GROUP BY books.id;
 
--- -- amt of books published per year (10)
--- SELECT books.year_published, COUNT(books.id)
---     FROM books
---     GROUP BY books.year_published;
+-- amt of books published per year (10)
+SELECT books.year_published, COUNT(books.id)
+    FROM books
+    GROUP BY books.year_published;
 
--- -- number of emails with certain domains (11)
--- SELECT SUBSTRING(email, INSTR(email, "@") + 1) AS email_domain,
---     COUNT(id) AS email_amt
---     FROM web_profiles
---     GROUP BY id;
+-- number of emails with certain domains (11)
+SELECT SUBSTRING(email, INSTR(email, "@") + 1) AS email_domain,
+    COUNT(id) AS email_amt
+    FROM web_profiles
+    GROUP BY SUBSTRING(email, INSTR(email, "@") + 1);
 
--- -- 3 most reviewed books (12)
--- SELECT books.title AS most_rated_books, COUNT(book_reviews.book_id) AS review_amt
---     FROM books
---     JOIN book_reviews ON books.id = book_reviews.book_id
---     GROUP BY books.id
---     ORDER BY review_amt DESC
---     LIMIT 3;
+-- 3 most reviewed books (12)
+SELECT books.title AS most_rated_books, COUNT(book_reviews.book_id) AS review_amt
+    FROM books
+    JOIN book_reviews ON books.id = book_reviews.book_id
+    GROUP BY books.id
+    ORDER BY review_amt DESC
+    LIMIT 3;
 
+-- authors with over 1 book published (13)
+SELECT authors.name, COUNT(book_authors.author_id) AS books_written_amt
+    FROM authors
+    LEFT JOIN book_authors ON authors.id = book_authors.author_id
+    GROUP BY authors.id, authors.name
+    HAVING COUNT(book_authors.author_id) > 1;
 
--- -- authors with over 1 book published (13)
--- SELECT authors.name, COUNT(book_authors.author_id) AS books_written_amt
---     FROM authors
---     LEFT JOIN book_authors ON authors.id = book_authors.author_id
+-- highest rated books (14)
+SELECT books.title, AVG(book_reviews.rating) AS avg_rating
+    FROM books
+    JOIN book_reviews ON books.id = book_reviews.book_id
+    GROUP BY books.id, books.title
+    HAVING AVG(book_reviews.rating) > 4;
 
--- -- highest rated books (14)
--- SELECT books.title, AVG(book_reviews.rating) AS avg_rating
---     FROM books
---     JOIN book_reviews ON books.id = book_reviews.book_id
---     GROUP by books.id
---     HAVING AVG(book_reviews.rating) > 4;
+-- busiest checkout days (15)
+SELECT checkout_date AS busy_days, COUNT(checkouts.book_id) AS amt_of_checkouts
+    FROM checkouts
+    GROUP BY DATE_FORMAT(checkouts.checkout_date, '%Y %m %d'), busy_days
+    HAVING amt_of_checkouts > 1;
 
--- -- busiest checkout days (15)
--- SELECT checkout_date AS busy_days, COUNT(checkouts.book_id) AS amt_of_checkouts
---     FROM checkouts
---     GROUP BY checkouts.checkout_date
---     HAVING amt_of_checkouts > 1;
+-- members with  or more checkouts (16)
+SELECT members.full_name, COUNT(checkouts.member_id) AS amt_checkouts
+    FROM members
+    JOIN checkouts ON members.id = checkouts.member_id
+    GROUP BY members.full_name
+    HAVING amt_checkouts >= 3;
 
--- -- members with  or more checkouts (16)
--- SELECT members.full_name, COUNT(checkouts.member_id) AS amt_checkouts
---     FROM members
---     JOIN checkouts ON members.id = checkouts.member_id
---     GROUP BY members.full_name
---     HAVING amt_checkouts >= 3;
+-- top 2 members by total checkouts (17)
+SELECT members.full_name, COUNT(checkouts.member_id)
+    FROM members
+    JOIN checkouts ON members.id = checkouts.member_id
+    GROUP BY members.id
+    ORDER BY COUNT(checkouts.member_id) DESC
+    LIMIT 5;
 
--- -- top 2 members by total checkouts (17)
--- SELECT members.full_name, COUNT(checkouts.member_id)
---     FROM members
---     JOIN checkouts ON members.id = checkouts.member_id
---     GROUP BY members.id
---     LIMIT 2;
+-- books with with reviews from more than one member (18)
+SELECT books.id, books.title,
+    GROUP_CONCAT(DISTINCT members.full_name SEPARATOR ' | ') AS reviewers
+    FROM books
+    JOIN book_reviews ON books.id = book_reviews.book_id
+    JOIN web_profiles ON book_reviews.memb_web_prof_id = web_profiles.id
+    JOIN members ON web_profiles.member_id = members.id
+    GROUP BY books.id, books.title
+    HAVING COUNT(book_reviews.memb_web_prof_id) > 1;
 
--- -- books with with reviews from more than one member (18)
--- SELECT books.title,
---     GROUP_CONCAT(DISTINCT members.full_name SEPARATOR ' | ') AS reviewers
---     FROM books
---     JOIN book_reviews ON books.id = book_reviews.book_id
---     JOIN web_profiles ON book_reviews.memb_web_prof_id = web_profiles.id
---     JOIN members ON web_profiles.member_id = members.id
---     GROUP BY books.id
---     HAVING COUNT(book_reviews.memb_web_prof_id) > 1;
-
--- -- authors with highly rated books (19)
--- SELECT authors.name AS author,
---     GROUP_CONCAT(books.title  SEPARATOR ' | ') AS books_written
---     FROM authors
---     JOIN book_authors ON authors.id = book_authors.author_id
---     JOIN books ON book_authors.book_id = books.id
---     JOIN book_reviews ON books.id = book_reviews.book_id
---     GROUP BY authors.id
---     HAVING AVG(book_reviews.rating) >= 4.5;
+-- authors with highly rated books (19)
+SELECT authors.name AS author,
+    GROUP_CONCAT(books.title  SEPARATOR ' | ') AS books_written
+    FROM authors
+    JOIN book_authors ON authors.id = book_authors.author_id
+    JOIN books ON book_authors.book_id = books.id
+    JOIN book_reviews ON books.id = book_reviews.book_id
+    GROUP BY authors.id
+    HAVING AVG(book_reviews.rating) >= 4.5;
