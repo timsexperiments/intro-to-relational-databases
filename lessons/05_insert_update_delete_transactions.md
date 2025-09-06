@@ -1,22 +1,22 @@
-# Lesson 5: Inserting, Deleting, and Updating Data
+# Lesson 5: Inserting, Updating, and Deleting Data
 
 ## What You’ll Learn
 
 - How to insert single and multiple rows into a table
-- How to delete data using the WHERE clause (and why soft deletes are often used)
 - How to update data using SET and WHERE
+- How to delete data using the WHERE clause (and why soft deletes are often used)
 - The basics of WHERE clause filtering and standard operators
-- The order of execution for DELETE and UPDATE
+- The order of execution for UPDATE and DELETE
 - How to use transactions to keep your data safe
 - Common pitfalls and best practices
 
 ## 1. Introduction
 
-Inserting, deleting, and updating data are the most common ways you’ll interact with a database after creating your tables.
+Inserting, updating, and deleting data are the most common ways you’ll interact with a database after creating your tables.
 
 - **INSERT** adds new data.
-- **DELETE** removes data.
 - **UPDATE** changes existing data.
+- **DELETE** removes data.
 
 Understanding how these commands work—and how the WHERE clause controls which rows are affected—is essential for safe, effective database work.
 
@@ -437,6 +437,6 @@ This helps prevent partial or inconsistent changes from being saved.
 You’ve completed the lesson on inserting, deleting, and updating data!  
 To reinforce what you’ve learned, complete the homework assignment for this lesson.
 
-**➡️ [Go to Homework 5: Inserting, Deleting, and Updating Data](../homework/hw5.md)**
+**➡️ [Go to Homework 5: Inserting, Updating, and Deleting Data](../homework/hw5.md)**
 
 If you have questions or want to try more examples, feel free to experiment with your tables or ask for help.
