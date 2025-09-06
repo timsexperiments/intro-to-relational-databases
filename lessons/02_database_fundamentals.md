@@ -1,4 +1,4 @@
-# Database Fundamentals
+# Lesson 2: Database Fundamentals
 
 ## What You’ll Learn
 

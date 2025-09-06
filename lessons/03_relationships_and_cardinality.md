@@ -1,4 +1,4 @@
-# Relationships and Cardinality
+# Lesson 3: Relationships and Cardinality
 
 ## What You’ll Learn
 
