@@ -1,4 +1,4 @@
-# Introduction to Relational Databases
+# Lesson 1: Introduction to Relational Databases
 
 ## What You’ll Learn
 
