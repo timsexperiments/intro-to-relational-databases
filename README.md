@@ -20,8 +20,8 @@ Welcome! This repository contains a collaborative, hands-on course for learning 
 | Working with Data | 12 | Subqueries | [Lesson](lessons/12_subqueries.md) | [HW12](homework/hw12.md) |
 | Working with Data | 13 | Common Table Expressions | [Lesson](lessons/13_ctes.md) | [HW13](homework/hw13.md) |
 | Working with Data | 14 | Window Functions | [Lesson](lessons/14_window_functions.md) | [HW14](homework/hw14.md) |
-| Working with Data | 15 | Views & Triggers | *coming soon* | *coming soon* |
-| Working with Data | 16 | Stored Procedures | *coming soon* | *coming soon* |
+| Working with Data | 15 | Views & Triggers | [Lesson](lessons/15_views_and_triggers.md) | [HW15](homework/hw15.md) |
+| Working with Data | 16 | Stored Procedures | [Lesson](lessons/16_stored_procedures.md) | [HW16](homework/hw16.md) |
 | From SQL to APIs | 17 | REST API Foundations | *coming soon* | *coming soon* |
 | From SQL to APIs | 18 | Validation & Error Handling | *coming soon* | *coming soon* |
 | From SQL to APIs | 19 | Authentication & Authorization | *coming soon* | *coming soon* |
