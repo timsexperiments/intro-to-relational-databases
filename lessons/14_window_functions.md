@@ -79,14 +79,14 @@ SELECT customer_id,
 FROM orders;
 ```
 
-## 4. Ranking Functions
-
 | customer_id | total_amount | customer_total |
 | ----------- | ------------ | -------------- |
 | 1           | 40.00        | 115.00         |
 | 1           | 75.00        | 115.00         |
 | 2           | 25.00        | 75.00          |
 | 2           | 50.00        | 75.00          |
+
+Choose window functions when you need both individual rows and a related calculation in the same result set.
 
 ### When to Use Which
 
