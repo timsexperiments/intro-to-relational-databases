@@ -254,7 +254,7 @@ SELECT b.title, AVG(br.rating) AS rating_avg
 
 -- (7) all member having written at least 1 review 
 
-using subqueries
+-- using subqueries
 SELECT m.full_name AS name
     FROM members m
     WHERE EXISTS (
@@ -264,7 +264,7 @@ SELECT m.full_name AS name
         WHERE m.id = wp.member_id
     );
 
-using joins
+-- using joins
 SELECT m.full_name AS name, COUNT(br.review_date) AS review_amt
     FROM members m
     JOIN web_profiles wp ON m.id = wp.member_id
