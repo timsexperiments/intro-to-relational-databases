@@ -1,0 +1,1 @@
+I feel like I may be missing something when it comes to windowed functions. I couldn't get the last one to be grouped correctly using windowed functions. I may come back and do that problem differently.
