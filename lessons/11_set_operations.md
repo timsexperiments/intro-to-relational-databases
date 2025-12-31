@@ -281,6 +281,6 @@ WHERE cp.phone IS NOT NULL;
 
 You’ve completed the lesson on combining query results! To reinforce what you’ve learned, complete the homework assignment for this lesson.
 
-**➡️ [Go to Homework 11: Combining Results](https://www.google.com/search?q=../homework/hw11.md)**
+**➡️ [Go to Homework 11: Combining Results](../homework/hw11.md)**
 
 If you have questions or want to try more examples, feel free to experiment with your tables or ask for help.
